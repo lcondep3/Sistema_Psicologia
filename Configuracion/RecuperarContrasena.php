@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $SentenciaActualizacion->execute();
 
             if ($SentenciaActualizacion->affected_rows > 0) {
-                header("Location:../PHP/Iniciar_Sesion.php?sucess=Contraseñas_Actualizada");
+                header("Location:../PHP/Iniciar_Sesion.php?success=Contraseñas_Actualizada");
                 exit();
             } else {
                 header("Location:../PHP/Recuperar_Contrasena.php?error=Error_en_Actualizacion");

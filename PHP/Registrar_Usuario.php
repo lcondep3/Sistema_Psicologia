@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
 
+    <link rel="icon" href="../imagenes/favicon-16x16.png" type="image/x-icon">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
 
     <!-- Bootstrap CSS -->
@@ -22,7 +25,7 @@
   <!--==================== HEADER ====================-->
   <header class="header" id="header">
     <nav class="nav container">
-      <a href="" class="nav__logo">
+      <a href="../Index.php" class="nav__logo">
         <img class="logo" src="../Imagenes/LOGOFULLNEGRO.png" alt="Descripción del logo">
 
       </a>
@@ -32,7 +35,7 @@
         <ul class="nav__list">
 
           <li class="nav__item">
-            <a href="../index.html" class="nav__link">
+            <a href="../index.php" class="nav__link">
               <i class="ri-arrow-right-up-line"></i>
               <span>BLOG</span>
             </a>
@@ -95,7 +98,7 @@
     <label for="usuario"><strong>Usuario</strong></label>
     <input type="text" id="usuario" name="Usuario" class="form-control">
     <label for="contrasena"><strong>Contraseña</strong></label>
-    <input type="password" id="contrasena" name="Contrasena" class="form-control">
+    <input type="password" id="contrasena" name="Contrasena" class="form-control" onblur="validarContrasena(this)">
     <label for="rcontrasena"><strong>Repetir Contraseña</strong></label>
     <input type="password" id="rcontrasena" name="RContrasena" class="form-control">
     <button class="btn btn-primary  mi-boton w-100 py-2" type="submit">REGISTRARSE</button>
@@ -154,5 +157,7 @@
         }
     });
 </script>
+
+<script src="../JS/ValidarContrasena.js"></script>
 </body>
 </html>

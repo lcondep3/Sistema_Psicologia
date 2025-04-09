@@ -19,7 +19,8 @@ if (!isset($_SESSION['Id_Usuario'])) {
     <title>Emoción Vital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/menulateral.css">
-    
+    <link rel="icon" href="../imagenes/favicon-16x16.png" type="image/x-icon">
+
     <link href="../CSS/Citas_Psicologo.css" rel="stylesheet">
 
 
@@ -141,7 +142,7 @@ if (!isset($_SESSION['Id_Usuario'])) {
                     </tr>
                     <tr>
                         <?php
-                        require '../Configuracion/CitasAgendadas.php';
+                        require '../Configuracion/CitasPsicologo.php';
                         if (mysqli_num_rows($Resultado1) > 0) {
                             // Mostrar los datos de cada fila
                             while ($Fila = mysqli_fetch_assoc($Resultado1)) {

@@ -61,7 +61,6 @@ if ($Fila['Id_TipoUsuario'] == 1) {
 
     </div>
     <!-- Final del menu  -->';
-
 } elseif ($Fila['Id_TipoUsuario'] == 2) {
     $menuLateral = '
 
@@ -146,11 +145,14 @@ if ($Fila['Id_TipoUsuario'] == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emoción Vital</title>
 
+    <link rel="icon" href="../imagenes/favicon-16x16.png" type="image/x-icon">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/menulateral.css">
     <link href="../CSS/Agendar_Cita.css" rel="stylesheet">
     <!-- Enlazar hoja de estilos CSS -->
-   
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -160,7 +162,7 @@ if ($Fila['Id_TipoUsuario'] == 1) {
 
 <body>
 
-<div class="Menu_Lateral" id="Menu_Lateral">
+    <div class="Menu_Lateral" id="Menu_Lateral">
         <?php echo $menuLateral; ?>
     </div>
 
@@ -172,14 +174,14 @@ if ($Fila['Id_TipoUsuario'] == 1) {
             <div class="container">
 
                 <div class="Nombre_Usuario">
-                        <?php
+                    <?php
                     if (isset($_SESSION['Usuario'])) {
                         echo "Bienvenido, " . $_SESSION['Usuario'];
                     }
                     ?>
                 </div>
-                    
-                
+
+
 
                 <nav class="Pasos_cita lh-1 fs-5">
                     <ul id="Pasos">
@@ -194,8 +196,8 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                 </nav>
 
                 <form id="Formulario_Cita" action="../Configuracion/AgendarCita.php" method="POST">
-               
-           
+
+
                     <!-- SELECCION DE TIPO DE CITA -->
                     <section id="Tipo_Cita" class="Seccion activa">
 
@@ -218,6 +220,10 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                         <h2 class="fw-bold duraciontext">
                             CADA SERVICIO TIENE UNA DUREACIÓN DE 45 MINUTOS.
                         </h2>
+                        <br>
+                        <p class= "parrafos">Psicoterapia Individual: Se enfoca en el tratamiento un solo individuo, generalmente mayor de 18 años.</p>
+                        <p class= "parrafos">Psicoterapia Infantil: Especialmente diseñada para niños, generalmente entre la edad de 3 años a 12 años.</p>
+                        <p class= "parrafos">Psicoterapia Adolescente: Diseñada para jovenes en la etapa de la adolescente, entre 12 y 18 años.</p>
                     </section>
 
 
@@ -248,7 +254,7 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                     <!-- DATOS DE PACIENTE -->
                     <section id="Datos_Paciente" class="Seccion">
                         <h2>Información de Paciente</h2>
-                        
+
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <!-- Columna 1 -->
@@ -263,8 +269,7 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="Documento_Id" class="form-control"
-                                        placeholder="Documento de Identidad" required>
+                                    <input type="text" name="Documento_Id" class="form-control" placeholder="Documento de Identidad" required oninput="soloNumerosGuionesYPuntos(this)">
                                 </div>
 
                                 <!--CAMPO DE CITA INFANTIL O ADOLESCENTE-->
@@ -272,16 +277,14 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                                     <div class="mb-3 d-flex align-items-center">
                                         <label for="Tiene_Documento" class="mr-2">¿Posee documento de
                                             identificación?</label>
-                                        <input type="checkbox" id="Tiene_Documento" name="Tiene_Documento"
-                                            onchange="mostrarDocumento()">
+                                        <input type="checkbox" id="Tiene_Documento" name="Tiene_Documento" onchange="mostrarDocumento()">
                                     </div>
 
 
                                     <div id="Documento_Menor_Div" style="display: none;">
                                         <div class="mb-3">
                                             <label for="Tipo_Documento_Menor">Tipo de Documento del Menor</label>
-                                            <select name="Tipo_Documento_Menor" id="Tipo_Documento_Menor"
-                                                class="form-select">
+                                            <select name="Tipo_Documento_Menor" id="Tipo_Documento_Menor" class="form-select">
                                                 <option value="" disabled selected>Tipo de Documento del Menor</option>
                                                 <option value="V-">Venezolano</option>
                                                 <option value="J-">Jurídico</option>
@@ -290,54 +293,45 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                                         </div>
 
                                         <div class="mb-3">
-                                            <input type="text" name="Documento_Menor" class="form-control"
-                                                placeholder="Documento de Identidad">
+                                            <input type="text" name="Documento_Menor" class="form-control" placeholder="Documento de Identidad" oninput="soloNumerosGuionesYPuntos(this)">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="text" name="Parentezco" id="Parentezco" class="form-control"
-                                            placeholder="Parentezco">
+                                        <input type="text" name="Parentezco" id="Parentezco" class="form-control" placeholder="Parentesco" oninput="soloLetras(this)">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="Primer_Nombre" id="Primer_Nombre" class="form-control"
-                                        placeholder="Primer Nombre" required>
+                                    <input type="text" name="Primer_Nombre" id="Primer_Nombre" class="form-control" placeholder="Primer Nombre" required oninput="soloLetras(this)">
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="Segundo_Nombre" id="Segundo_Nombre" class="form-control"
-                                        placeholder="Segundo Nombre">
+                                    <input type="text" name="Segundo_Nombre" id="Segundo_Nombre" class="form-control" placeholder="Segundo Nombre" oninput="soloLetras(this)">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <!-- Columna 2 -->
                                 <div class="mb-3">
-                                    <input type="text" name="Primer_Apellido" id="Primer_Apellido" class="form-control"
-                                        placeholder="Primer Apellido" required>
+                                    <input type="text" name="Primer_Apellido" id="Primer_Apellido" class="form-control" placeholder="Primer Apellido" required oninput="soloLetras(this)">
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="Segundo_Apellido" id="Segundo_Apellido"
-                                        class="form-control" placeholder="Segundo Apellido">
+                                    <input type="text" name="Segundo_Apellido" id="Segundo_Apellido" class="form-control" placeholder="Segundo Apellido" oninput="soloLetras(this)">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="Fecha_Nacimiento">Fecha de Nacimiento</label>
-                                    <input type="date" name="Fecha_Nacimiento" id="Fecha_Nacimiento"
-                                        class="form-control" placeholder="Fecha de Nacimiento" required>
+                                    <input type="date" name="Fecha_Nacimiento" id="Fecha_Nacimiento" class="form-control" placeholder="Fecha de Nacimiento" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="Telefono" id="Telefono" class="form-control"
-                                        placeholder="Teléfono" required>
+                                    <input type="text" name="Telefono" id="Telefono" class="form-control" placeholder="Teléfono" required  oninput="validarTelefono(this)">
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="email" name="Correo" id="Correo" class="form-control"
-                                        placeholder="Correo Electrónico" required>
+                                    <input type="email" name="Correo" id="Correo" class="form-control" placeholder="Correo Electrónico" required onblur="validarCorreo(this)">
                                 </div>
 
                                 <div class="mb-3">
@@ -352,13 +346,11 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                                 <!--CAMPO DE CITA INDIVIDUAL O PAREJA-->
                                 <div class="Datos_Mayor" id="Datos_Mayor">
                                     <div class="mb-3">
-                                        <input type="text" name="Profesion" id="Profesion" class="form-control"
-                                            placeholder="Profesión">
+                                        <input type="text" name="Profesion" id="Profesion" class="form-control" placeholder="Profesión" oninput="soloLetras(this)">
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="text" name="Num_Hijos" id="Num_Hijos" class="form-control"
-                                            placeholder="Cantidad de hijos">
+                                        <input type="text" name="Num_Hijos" id="Num_Hijos" class="form-control" placeholder="Cantidad de hijos" oninput="soloNumeros(this)">
                                     </div>
                                 </div>
                             </div>
@@ -391,8 +383,7 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="Direccion_Vivienda" id="Direccion_Vivienda"
-                                        class="form-control" placeholder="Dirección de vivienda" required>
+                                    <input type="text" name="Direccion_Vivienda" id="Direccion_Vivienda" class="form-control" placeholder="Dirección de vivienda" required>
                                 </div>
                             </div>
                         </div>
@@ -402,34 +393,31 @@ if ($Fila['Id_TipoUsuario'] == 1) {
                     <section id="Confirmar_Cita" class="Seccion">
                         <div class="contenedorconfirmar">
 
-                           
-                        <h2 class="display-6 fw-bold lh-1">¿DESEA CONFIRMAR SU CITA?</h2>
 
-                        <br>
-                        <br>
+                            <h2 class="display-6 fw-bold lh-1">¿DESEA CONFIRMAR SU CITA?</h2>
 
-                        <h7>Psicóloga:</h7>
+                            <br>
+                            <br>
 
-                        <b>Licenciada Daniela Mogollón<b>
-                            <button type=" button" id="cancelarBtn"
-                                class="btn btn-primary mi-boton me-3">CANCELAR</button>
+                            <h7>Psicóloga:</h7>
+
+                            <b>Licenciada Daniela Mogollón<b>
+                                    <button type=" button" id="cancelarBtn" class="btn btn-primary mi-boton me-3">CANCELAR</button>
                         </div>
                     </section>
 
                     <div class="d-flex justify-content-center">
 
 
-                    <button type="submit" class="btn_Confirmar btn btn-primary mi-boton me-3"  id="btn_Confirmar">CONFIRMAR</button>
+                        <button type="submit" class="btn_Confirmar btn btn-primary mi-boton me-3" id="btn_Confirmar">CONFIRMAR</button>
                     </div>
 
                 </form>
 
                 <div class="d-flex justify-content-center">
 
-                    <button type="button" class="btn btn-primary mi-boton me-3"
-                        onclick="AnteriorPaso()">ANTERIOR</button>
-                    <button type="button" class="btn btn-primary mi-boton me-3" id="btn_Siguiente"
-                        onclick="SiguientePaso()">SIGUIENTE</button>
+                    <button type="button" class="btn btn-primary mi-boton me-3" onclick="AnteriorPaso()">ANTERIOR</button>
+                    <button type="button" class="btn btn-primary mi-boton me-3" id="btn_Siguiente" onclick="SiguientePaso()">SIGUIENTE</button>
                 </div>
             </div>
         </div>
@@ -445,10 +433,8 @@ if ($Fila['Id_TipoUsuario'] == 1) {
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <script src="../JS/menulateral.js"></script>
     <script src="../JS/CargarDireccion.js"></script>
     <script src="../JS/AgendarCita.js"></script>
@@ -459,7 +445,7 @@ if ($Fila['Id_TipoUsuario'] == 1) {
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-                    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
@@ -492,6 +478,10 @@ if ($Fila['Id_TipoUsuario'] == 1) {
         });
     </script>
 
+
+</body>
+
+</html>
 
 </body>
 
